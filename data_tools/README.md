@@ -42,8 +42,7 @@ data/vg/mini_VG-SGG-dicts.h5
 (i). To start with, download VisualGenome dataset using the following links:
 - Images [part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip) [part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip)
 - [Image metadata](http://cvgl.stanford.edu/scene-graph/VG/image_data.json)
-- [Objects](http://cvgl.stanford.edu/scene-graph/VG/objects.json)
-- [Relationships](http://cvgl.stanford.edu/scene-graph/VG/relationships.json)
+- [VG scene graph](http://cvgl.stanford.edu/scene-graph/VG/VG-scene-graph.zip)
 
 (ii). Place all the json files under `data_tools/VG/`. Place the images under `data_tools/VG/images`
 
