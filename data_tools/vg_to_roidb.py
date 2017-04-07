@@ -259,7 +259,7 @@ def encode_objects(obj_data, token_to_idx, token_counter, org_h, org_w, im_long_
                 for size in im_long_sizes:
                     encoded_boxes[size].append(encode_box(obj, org_h[i], org_w[i], size))
 
-                encoded_labels[-1].append(token_to_idx[obj_label])
+                encoded_labels.append(token_to_idx[obj_label])
 
                 for obj_id in obj['ids']: # assign same index for merged ids
                     img['id_to_idx'][obj_id] = obj_counter
