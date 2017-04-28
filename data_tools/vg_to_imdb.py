@@ -34,8 +34,13 @@ def encode_filenames(data, filename_to_idx):
 
 def add_images(im_data, h5_file, args):
     fns = []; ids = []; idx = []
+    corrupted_ims = ['1592.jpg', '1722.jpg', '4616.jpg', '4617.jpg']
     for i, img in enumerate(im_data):
-        filename = os.path.join(args.image_dir, str(img['image_id']) + '.jpg')
+        basename =  str(img['image_id']) + '.jpg'
+        if basename in corrupted_ims:
+            continue
+            
+        filename = os.path.join(args.image_dir, basename)
         if os.path.exists(filename):
             fns.append(filename)
             ids.append(img['image_id'])
