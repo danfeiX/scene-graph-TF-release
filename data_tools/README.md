@@ -34,7 +34,7 @@ After downloading the dataset, place all files under `data/vg/`. If you use the 
 data/vg/mini_imdb_1024.h5
 data/vg/mini_proposals.h5
 data/vg/mini_VG-SGG.h5
-data/vg/mini_VG-SGG-dicts.h5
+data/vg/mini_VG-SGG-dicts.json
 ```
 
 
