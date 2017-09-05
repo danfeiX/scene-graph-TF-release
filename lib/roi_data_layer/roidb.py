@@ -63,6 +63,7 @@ def compute_bbox_target_normalization(roidb):
 
     means = sums / class_counts
     stds = np.sqrt(squared_sums / class_counts - means ** 2)
+    np.save(cfg.TRAIN.BBOX_TARGET_NORMALIZATION_FILE, {'means': means, 'stds': stds})
 
     if cfg.TRAIN.BBOX_NORMALIZE_TARGETS:
         print "Normalizing targets"
