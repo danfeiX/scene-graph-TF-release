@@ -69,7 +69,7 @@ def viz_scene_graph(im, rois, labels, inds=None, rels=None, preprocess=True):
     """
     visualize a scene graph on an image
     """
-    if inds == None:
+    if inds is None:
         inds = np.arange(rois.shape[0])
     viz_rois = rois[inds]
     viz_labels = labels[inds]
