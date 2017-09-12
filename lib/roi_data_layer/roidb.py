@@ -52,9 +52,10 @@ def compute_bbox_target_normalization(roidb):
     squared_sums = np.zeros((num_classes, 4))
     for im_i in xrange(num_images):
         targets = roidb[im_i]['bbox_targets']
-        for cls in xrange(1, num_classes):
-            cls_inds = np.where(targets[:, 0] == cls)[0]
-            if cls_inds.size > 0:
+        image_target_classes = np.unique(targets[:, 0]).astype(int)
+        for cls in image_target_classes:
+            if(cls > 0):
+                cls_inds = np.where(targets[:, 0] == cls)[0]
                 class_counts[cls] += cls_inds.size
                 sums[cls, :] += targets[cls_inds, 1:].sum(axis=0)
                 squared_sums[cls, :] += \
@@ -62,15 +63,18 @@ def compute_bbox_target_normalization(roidb):
 
     means = sums / class_counts
     stds = np.sqrt(squared_sums / class_counts - means ** 2)
+    np.save(cfg.TRAIN.BBOX_TARGET_NORMALIZATION_FILE, {'means': means, 'stds': stds})
 
     if cfg.TRAIN.BBOX_NORMALIZE_TARGETS:
         print "Normalizing targets"
         for im_i in xrange(num_images):
             targets = roidb[im_i]['bbox_targets']
-            for cls in xrange(1, num_classes):
-                cls_inds = np.where(targets[:, 0] == cls)[0]
-                roidb[im_i]['bbox_targets'][cls_inds, 1:] -= means[cls, :]
-                roidb[im_i]['bbox_targets'][cls_inds, 1:] /= stds[cls, :]
+            image_target_classes = np.unique(targets[:, 0]).astype(int)
+            for cls in image_target_classes:
+                if(cls > 0):
+                    cls_inds = np.where(targets[:, 0] == cls)[0]
+                    roidb[im_i]['bbox_targets'][cls_inds, 1:] -= means[cls, :]
+                    roidb[im_i]['bbox_targets'][cls_inds, 1:] /= stds[cls, :]
     else:
         print "NOT normalizing targets"
 
