@@ -28,7 +28,7 @@ class vg_hdf5(imdb):
         else: # -1
             split_mask = data_split >= 0 # all
         # get rid of images that do not have box
-        valid_mask = self.roi_h5['img_to_first_box'][:] > 0
+        valid_mask = self.roi_h5['img_to_first_box'][:] >= 0
         valid_mask = np.bitwise_and(split_mask, valid_mask)
         self._image_index = np.where(valid_mask)[0] # split index
 
